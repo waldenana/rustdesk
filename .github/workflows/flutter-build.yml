@@ -72,7 +72,7 @@ jobs:
               suffix: "",
             }
     steps:
-     - name: Setup sign tool version variable
+      - name: Setup sign tool version variable
         shell: bash
         run: |
           echo Apk sign: $ANDROID_SIGNING_KEY
