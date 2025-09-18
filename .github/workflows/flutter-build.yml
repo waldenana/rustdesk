@@ -71,14 +71,12 @@ jobs:
               reltype: release,
               suffix: "",
             }
-          - {
-              arch: x86_64,
-              target: x86_64-linux-android,
-              os: ubuntu-24.04,
-              reltype: release,
-              suffix: "",
-            }
     steps:
+     - name: Setup sign tool version variable
+        shell: bash
+        run: |
+          echo Apk sign: $ANDROID_SIGNING_KEY
+          echo Apk secrets: ${{ secrets.ANDROID_SIGNING_KEY}}
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@main
         with:
@@ -300,6 +298,7 @@ jobs:
           echo "ANDROID_SIGN_TOOL_VERSION=$BUILD_TOOL_VERSION" >> $GITHUB_ENV
           echo Last build tool version is: $BUILD_TOOL_VERSION
           echo Apk sign: $ANDROID_SIGNING_KEY
+          echo Apk secrets: ${{ secrets.ANDROID_SIGNING_KEY}}
 
       - uses: r0adkll/sign-android-release@v1
         name: Sign app APK
