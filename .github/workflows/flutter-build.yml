@@ -300,6 +300,12 @@ jobs:
           echo Apk sign: $ANDROID_SIGNING_KEY
           echo Apk secrets: ${{ secrets.ANDROID_SIGNING_KEY}}
 
+      - name: Upload unsign
+        uses: actions/upload-artifact@master
+        with:
+          name: unsigned-${{ env.VERSION }}-${{ matrix.job.arch }}.apk
+          path: signed-apk/rustdesk-${{ env.VERSION }}-${{ matrix.job.arch }}.apk
+          
       - uses: r0adkll/sign-android-release@v1
         name: Sign app APK
         if: env.ANDROID_SIGNING_KEY != null
